@@ -5,6 +5,7 @@ VENV=${HOME}/.virtualenvs/advent
 all: clean install test
 
 clean:
+	rm -rf .mypy_cache
 	rm -rf .pytest_cache
 	find . -type d -depth -name __pycache__ -exec rm -rf "{}" \;
 
@@ -24,3 +25,6 @@ t2:
 
 format:
 	$(VENV)/bin/black .
+
+mypy:
+	$(VENV)/bin/mypy .
