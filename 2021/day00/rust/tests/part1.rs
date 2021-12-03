@@ -24,6 +24,7 @@ fn get_lines<T: FromStr>(filename: &str) -> Vec<T> {
 }
 
 #[test]
+#[ignore]
 fn test_compute_answer_full() {
     let lines = get_lines::<String>("../data/input.dat");
     // Vec<String> => Vec<&str>
