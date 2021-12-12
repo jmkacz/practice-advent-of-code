@@ -1,12 +1,13 @@
 .PHONY: all
 all: test
 
-test: testpart1 testpart2
+test:
+	go test ./...
 
-testpart1:
+t1:
 	go test advent/part1
 
-testpart2:
+t2:
 	go test advent/part2
 
 format:
