@@ -1,0 +1,30 @@
+digraph G {
+  AlphaCentauri -> Snowdin [label="66"];
+  AlphaCentauri -> Tambi [label="28"];
+  AlphaCentauri -> Faerun [label="60"];
+  AlphaCentauri -> Norrath [label="34"];
+  AlphaCentauri -> Straylight [label="34"];
+  AlphaCentauri -> Tristram [label="3"];
+  AlphaCentauri -> Arbre [label="108"];
+  Snowdin -> Tambi [label="22"];
+  Snowdin -> Faerun [label="12"];
+  Snowdin -> Norrath [label="91"];
+  Snowdin -> Straylight [label="121"];
+  Snowdin -> Tristram [label="111"];
+  Snowdin -> Arbre [label="71"];
+  Tambi -> Faerun [label="39"];
+  Tambi -> Norrath [label="113"];
+  Tambi -> Straylight [label="130"];
+  Tambi -> Tristram [label="35"];
+  Tambi -> Arbre [label="40"];
+  Faerun -> Norrath [label="63"];
+  Faerun -> Straylight [label="21"];
+  Faerun -> Tristram [label="57"];
+  Faerun -> Arbre [label="83"];
+  Norrath -> Straylight [label="9"];
+  Norrath -> Tristram [label="50"];
+  Norrath -> Arbre [label="60"];
+  Straylight -> Tristram [label="27"];
+  Straylight -> Arbre [label="81"];
+  Tristram -> Arbre [label="90"];
+}
