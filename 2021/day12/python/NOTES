@@ -1,0 +1,18 @@
+Removing the first element of a list is on the order of
+10,000x slower than popping it off the end of the list.
+
+>>> import timeit
+
+>>> timeit.timeit('head = q[0]; q = q[1:]', setup='q = [1] * 1_000_000', number=10_000)
+94.69178146601189
+>>> timeit.timeit('head = q.pop()',         setup='q = [1] * 1_000_000', number=10_000)
+0.001132472010795027
+>>> round(94.69178146601189 / 0.001132472010795027)
+83615
+
+>>> timeit.timeit('head = q[0]; q = q[1:]', setup='q = [1] * 1_000_000', number=100_000)
+689.1274927289924
+>>> timeit.timeit('head = q.pop()',         setup='q = [1] * 1_000_000', number=100_000)
+0.0143026850419119
+>>> round(689.1274927289924 / 0.0143026850419119)
+48182
