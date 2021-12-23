@@ -1,0 +1,58 @@
+from typing import List, Tuple
+
+MAPPING = {
+    ".": 0,
+    "#": 1,
+}
+
+
+def parse(lines: List[str]) -> Tuple[List[int], List[List[int]]]:
+    algorithm, image = [], []
+    
+    index = 0
+    while lines[index] != "":
+        algorithm.extend([MAPPING[pixel] for pixel in lines[index]])
+        index += 1
+
+    index += 1
+
+    print(index, len(lines))
+    #for r in 
+    """
+    while index < len(lines):
+        image.append([0] + [MAPPING[pixel] for pixel in lines[index]] + [0])
+        index += 1
+    image = [[0] * len(image[0])] + image + [[0] * len(image[0])]
+    """
+    return algorithm, image
+
+
+"""
+def calculate_pixel(algorithm: List[int], image: List[List[int]], r: int, c: int) -> int:
+    index = 0
+    for dr in (-1, 0, 1):
+        for dc in (-1, 0, 1):
+            index = (index << 1) + image[r+dr][c+dc]
+    return algorithm[index]
+
+
+def step(algorithm: List[int], image: List[List[int]]) -> List[List[int]]:
+    next_image = [[0] * len(image[0]) for _ in range(len(image))]
+    for r in range(1, len(image)-1):
+        for c in range(1, len(image[0])-1):
+            next_image[r][c] = calculate_pixel(algorithm, image, r, c)
+    return next_image
+
+
+def dump(image):
+    for line in image:
+        print( ''.join([str(pixel) for pixel in line]).replace('0', '.').replace('1', '#') )
+"""
+
+
+def compute_answer(lines: List[str]) -> int:
+    algorithm, image = parse(lines)
+    # dump(image)
+    #image = step(algorithm, image)
+    #print(image)
+    #image = step(algorithm, image)

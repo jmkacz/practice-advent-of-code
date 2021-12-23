@@ -32,32 +32,28 @@ def find_bounds(image: Set[Tuple[int, int]]) -> Tuple[int, int, int, int]:
     return r1, r2, c1, c2
 
 
+def calculate_pixel(
+    algorithm: List[int], image: Set[Tuple[int, int]], r: int, c: int
+) -> int:
+    index = 0
+    for dr in (-1, 0, 1):
+        for dc in (-1, 0, 1):
+            index = index << 1
+            if (r + dr, c + dc) in image:
+                index += 1
+    return algorithm[index]
+
+
 def step(
-    algorithm: List[int], image: Set[Tuple[int, int]], step: int
+    algorithm: List[int], image: Set[Tuple[int, int]]
 ) -> Set[Tuple[int, int]]:
-    inf = 1 & step & algorithm[0]
     next_image = set()
     r1, r2, c1, c2 = find_bounds(image)
     for r in range(r1 - 1, (r2 + 1) + 1):
         for c in range(c1 - 1, (c2 + 1) + 1):
-            index = 0
-            for dr in (-1, 0, 1):
-                for dc in (-1, 0, 1):
-                    index = index << 1
-                    value = 0
-                    # inside frontier
-                    if r1 <= (r + dr) <= r2 and c1 <= (c + dc) <= c2:
-                        if (r + dr, c + dc) in image:
-                            value = 1
-                    # outside frontier
-                    else:
-                        value = inf
-                    # sys.stdout.write(str(value)) # XXX
-                    index += value
-            # print(" ", index, algorithm[index]) # XXX
-            if algorithm[index]:
+            value = calculate_pixel(algorithm, image, r, c)
+            if value:
                 next_image.add((r, c))
-        # print() # XXX
     return next_image
 
 
@@ -68,16 +64,23 @@ def dump(image: Set[Tuple[int, int]]):
             sys.stdout.write("#" if (r, c) in image else ".")
         sys.stdout.write("\n")
 
+"""
+def step(pixels, infinite_bit):
+            index = 0
+            for di in range(i - 1, i + 2):
+                for dj in range(j - 1, j + 2):
+                    index = index << 1 | (
+                        int((di, dj) in pixels)
+                        if (min_i <= di <= max_i and min_j <= dj <= max_j)
+                        else infinite_bit
+                    )
+"""
 
 def compute_answer(lines: List[str]) -> int:
     algorithm, image = parse(lines)
-    # dump(image) # XXX
-
-    for iteration in range(2):
-        # print() # XXX
-        image = step(algorithm, image, step=iteration)
-        # dump(image) # XXX
-        # print() # XXX
-        # print(sorted(image)) # XXX
-
+    # dump(image)
+    image = step(algorithm, image)
+    # dump(image)
+    image = step(algorithm, image)
+    dump(image)
     return len(image)

@@ -33,8 +33,9 @@ def find_bounds(image: Set[Tuple[int, int]]) -> Tuple[int, int, int, int]:
 
 
 def step(
-    algorithm: List[int], image: Set[Tuple[int, int]], inf: int
+    algorithm: List[int], image: Set[Tuple[int, int]], step: int
 ) -> Set[Tuple[int, int]]:
+    inf = 1 & step & algorithm[0]
     next_image = set()
     r1, r2, c1, c2 = find_bounds(image)
     for r in range(r1 - 1, (r2 + 1) + 1):
@@ -43,15 +44,20 @@ def step(
             for dr in (-1, 0, 1):
                 for dc in (-1, 0, 1):
                     index = index << 1
+                    value = 0
                     # inside frontier
                     if r1 <= (r + dr) <= r2 and c1 <= (c + dc) <= c2:
                         if (r + dr, c + dc) in image:
-                            index += 1
+                            value = 1
                     # outside frontier
                     else:
-                        index += inf
+                        value = inf
+                    # sys.stdout.write(str(value)) # XXX
+                    index += value
+            # print(" ", index, algorithm[index]) # XXX
             if algorithm[index]:
                 next_image.add((r, c))
+        # print() # XXX
     return next_image
 
 
@@ -65,10 +71,13 @@ def dump(image: Set[Tuple[int, int]]):
 
 def compute_answer(lines: List[str]) -> int:
     algorithm, image = parse(lines)
+    # dump(image) # XXX
 
     for iteration in range(50):
-        inf = iteration & algorithm[0]  # ex. 0 & 0 = 0, 0 & 1 = 0
-        image = step(algorithm, image, inf)
-        # dump(image)
+        # print() # XXX
+        image = step(algorithm, image, step=iteration)
+        # dump(image) # XXX
+        # print() # XXX
+        # print(sorted(image)) # XXX
 
     return len(image)
