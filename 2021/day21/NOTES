@@ -1,0 +1,30 @@
+make t2 >output.log 2>&1
+sort output.log > sorted.log
+cat sorted.log | uniq -c > unique.log
+cat unique.log | sort -rn | head
+
+With a score of (20, 20), whoever's turn it is will win in 27 out of 27 universes.
+
+  14 Calling play, player=1, spaces=(6, 2), scores=(20, 20)
+  14 Called  play, player=1, spaces=(6, 2), scores=(20, 20), wins=(0, 27)
+
+3 x 1 => scores=(20, 20 + (2 + 3)) => scores=(20, 25) => wins=(1, 0) x 1 
+4 x 3 => scores=(20, 20 + (2 + 4)) => scores=(20, 26) => wins=(1, 0) x 3
+5 x 6 => scores=(20, 20 + (2 + 5)) => scores=(20, 27) => wins=(1, 0) x 6
+6 x 7 => scores=(20, 20 + (2 + 6)) => scores=(20, 28) => wins=(1, 0) x 7
+7 x 6 => scores=(20, 20 + (2 + 7)) => scores=(20, 29) => wins=(1, 0) x 6
+8 x 3 => scores=(20, 20 + (2 + 8)) => scores=(20, 30) => wins=(1, 0) x 3
+9 x 1 => scores=(20, 20 + (2 + 9)) => scores=(20, 21) => wins=(1, 0) x 1
+
+Another example, 
+
+  27 Calling play, player=0, spaces=(1, 1), scores=(15, 20)
+  27 Called  play, player=0, spaces=(1, 1), scores=(15, 20), wins=(23, 108)
+
+3 x 1 => scores=(15 + (1 + 3), 20) => scores=(19, 20) => wins=(0, 27) x 1 
+4 x 3 => scores=(15 + (1 + 4), 20) => scores=(20, 20) => wins=(0, 27) x 3
+5 x 6 => scores=(15 + (1 + 5), 20) => scores=(21, 20) => wins=(1,  0) x 6
+6 x 7 => scores=(15 + (1 + 6), 20) => scores=(22, 20) => wins=(1,  0) x 7
+7 x 6 => scores=(15 + (1 + 7), 20) => scores=(23, 20) => wins=(1,  0) x 6
+8 x 3 => scores=(15 + (1 + 8), 20) => scores=(24, 20) => wins=(1,  0) x 3
+9 x 1 => scores=(15 + (1 + 9), 20) => scores=(25, 20) => wins=(1,  0) x 1
