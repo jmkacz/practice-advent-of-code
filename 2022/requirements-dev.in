@@ -1,0 +1,8 @@
+-r requirements.txt
+black
+flake8
+isort[requirements_deprecated_finder]
+mypy
+pylint
+pyproject-flake8
+pytest
