@@ -3,7 +3,7 @@
 PYTHON_VERSION=3.11.0
 VIRTUALENV_NAME=advent-of-code-2022
 
-all: clean install test
+all: test format lint clean
 
 clean:
 	rm -rf .mypy_cache
